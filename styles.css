@@ -1252,28 +1252,96 @@ body {
 /* Mobile & Tablet Responsiveness */
 @media (max-width: 768px) {
   .shell {
-    width: calc(100% - 24px);
-    padding-top: 14px;
+    width: calc(100% - 20px);
+    padding-top: 12px;
+  }
+
+  .topbar {
+    padding: 8px 12px;
+    border-radius: 16px;
+    min-height: 56px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .brand-mark svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .brand-text p {
+    font-size: 12px;
+  }
+
+  .brand-text span {
+    font-size: 10px;
+  }
+
+  .top-actions {
+    gap: 6px;
+  }
+
+  .social-button span {
+    display: none;
+  }
+
+  .social-button {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  .icon-button {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
   }
 
   .hero {
-    padding: 52px 10px 32px;
+    padding: 40px 8px 24px;
   }
 
   .hero h1 {
-    font-size: 38px;
+    font-size: 32px;
+    line-height: 1.15;
   }
 
   .lede {
-    font-size: 14.5px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    padding: 0 4px;
+  }
+
+  .hero-tags {
+    gap: 6px;
+    margin-top: 16px;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    padding: 4px 10px;
   }
 
   .dropzone {
     flex-direction: column;
-    min-height: 310px;
-    gap: 22px;
-    padding: 36px 20px;
+    min-height: 270px;
+    gap: 18px;
+    padding: 30px 16px;
     text-align: center;
+  }
+
+  .drop-copy h2 {
+    font-size: 19px;
   }
 
   .drop-badges {
@@ -1282,10 +1350,26 @@ body {
 
   .result-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
   .processor {
     padding: 16px 12px;
+  }
+
+  .pipeline-visualizer {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 14px 12px;
+  }
+
+  .pipeline-arrow {
+    transform: rotate(90deg);
+    margin: -2px 0;
+  }
+
+  .video-wrap video {
+    max-height: 230px;
   }
 
   .actions {
@@ -1302,14 +1386,30 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .social-button span {
-    display: none;
+  .toast {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 27px;
   }
 
-  .social-button {
-    width: 38px;
-    padding: 0;
-    justify-content: center;
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .file-row {
+    flex-wrap: wrap;
+  }
+
+  .text-button {
+    margin-left: auto;
   }
 }
 
