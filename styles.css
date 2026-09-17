@@ -1,13 +1,13 @@
 :root {
-  --bg-base: #06070a;
-  --bg-surface: rgba(14, 17, 27, 0.65);
-  --bg-surface-elevated: rgba(22, 27, 44, 0.75);
+  --bg-base: #07090e;
+  --bg-surface: #0e121d;
+  --bg-surface-elevated: #151a2a;
   --ink: #f8fafc;
   --ink-secondary: #94a3b8;
   --ink-muted: #64748b;
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-glow: rgba(168, 85, 247, 0.35);
-  --border-highlight: rgba(255, 255, 255, 0.18);
+  --border-highlight: rgba(255, 255, 255, 0.15);
   
   --primary: #8b5cf6;
   --primary-bright: #a855f7;
@@ -18,7 +18,7 @@
   --emerald: #10b981;
   --emerald-glow: rgba(16, 185, 129, 0.3);
   --danger: #f43f5e;
-  --danger-bg: rgba(244, 63, 94, 0.1);
+  --danger-bg: rgba(244, 63, 94, 0.12);
   --danger-border: rgba(244, 63, 94, 0.25);
   
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -45,93 +45,40 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.18), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 85% 60%, rgba(168, 85, 247, 0.12), transparent 60%),
-    radial-gradient(ellipse 50% 50% at 15% 75%, rgba(6, 182, 212, 0.1), transparent 60%),
-    linear-gradient(180deg, #07090e 0%, #050608 50%, #07090e 100%);
+  background-color: #07090e;
+  background-image:
+    radial-gradient(ellipse 70% 35% at 50% 0%, rgba(99, 102, 241, 0.12), transparent 70%),
+    radial-gradient(ellipse 50% 25% at 85% 15%, rgba(168, 85, 247, 0.08), transparent 60%),
+    radial-gradient(ellipse 40% 25% at 15% 35%, rgba(6, 182, 212, 0.06), transparent 60%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* High-tech ambient background grid */
+/* High-tech ambient background grid - Ultra lightweight */
 .bg-grid {
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 85%);
+  opacity: 0.6;
 }
 
-/* Dynamic Aurora Glow Spheres */
-.aurora {
-  position: fixed;
-  z-index: 0;
-  border-radius: 50%;
-  filter: blur(110px);
-  opacity: 0.22;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  will-change: transform;
-}
-
-.aurora-one {
-  top: -5%;
-  left: 20%;
-  width: 45rem;
-  height: 35rem;
-  background: radial-gradient(circle, #7c3aed 0%, #4338ca 60%, transparent 80%);
-  animation: driftOne 22s var(--ease) infinite alternate;
-}
-
-.aurora-two {
-  top: 35%;
-  right: -10rem;
-  width: 38rem;
-  height: 38rem;
-  background: radial-gradient(circle, #06b6d4 0%, #3b82f6 50%, transparent 75%);
-  animation: driftTwo 18s var(--ease) infinite alternate-reverse;
-}
-
-.aurora-three {
-  bottom: -5%;
-  left: -10rem;
-  width: 40rem;
-  height: 35rem;
-  background: radial-gradient(circle, #c084fc 0%, #6366f1 50%, transparent 75%);
-  animation: driftOne 26s var(--ease) infinite alternate;
-}
-
-@keyframes driftOne {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(4rem, 3rem) scale(1.08); }
-  100% { transform: translate(-3rem, 5rem) scale(0.95); }
-}
-
-@keyframes driftTwo {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-5rem, -2rem) scale(1.1); }
-  100% { transform: translate(2rem, 4rem) scale(0.92); }
-}
-
-/* Glass Surface Styling */
+/* Glass Surface Styling - Hardware-accelerated without heavy backdrop blur */
 .glass {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-top-color: var(--border-highlight);
   border-radius: 24px;
   box-shadow: 
-    0 30px 70px -15px rgba(0, 0, 0, 0.65),
-    0 0 1px 1px rgba(255, 255, 255, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    0 20px 45px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .shell {
@@ -659,30 +606,12 @@ body {
   width: 0;
   border-radius: inherit;
   background: linear-gradient(90deg, #8b5cf6 0%, #6366f1 45%, #06b6d4 100%);
-  background-size: 200% 100%;
-  animation: progressGlowShift 3s ease infinite;
-  box-shadow: 0 0 14px rgba(139, 92, 246, 0.6);
-  transition: width 0.45s var(--ease);
-}
-
-@keyframes progressGlowShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+  transition: width 0.35s ease;
 }
 
 .progress-track b {
-  position: absolute;
-  top: -8px;
-  left: 0;
-  width: 60px;
-  height: 24px;
-  opacity: 0.7;
-  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
-  filter: blur(8px);
-  transform: translateX(-50%);
-  transition: left 0.45s var(--ease);
-  pointer-events: none;
+  display: none;
 }
 
 #statusDetail {
@@ -752,7 +681,6 @@ body {
   border: 1px solid var(--danger-border);
   border-radius: 16px;
   background: var(--danger-bg);
-  backdrop-filter: blur(16px);
   animation: reveal 0.3s var(--ease);
 }
 
@@ -1044,7 +972,6 @@ body {
   font-weight: 500;
   color: var(--ink-secondary);
   letter-spacing: 0.01em;
-  backdrop-filter: blur(10px);
   transition: all 0.25s var(--ease);
 }
 
@@ -1225,15 +1152,13 @@ body {
   padding: 12px 18px;
   border-radius: 14px;
   border: 1px solid rgba(168, 85, 247, 0.35);
-  background: rgba(15, 19, 32, 0.92);
+  background: #0e121e;
   color: #ffffff;
   font-size: 13px;
   font-weight: 500;
   box-shadow: 
     0 16px 36px rgba(0, 0, 0, 0.5),
-    0 0 24px rgba(139, 92, 246, 0.3);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+    0 0 20px rgba(139, 92, 246, 0.2);
   animation: toastIn 0.3s var(--ease);
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
 }
