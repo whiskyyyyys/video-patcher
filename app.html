@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#06070a">
+    <title>Whis Video Patcher — Lossless In-Browser MP4 Pipeline</title>
+    <meta name="description" content="Local, lossless ISO-BMFF container structure patcher with real-time inspection, fast-start optimization, and zero re-encoding.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="bg-grid" aria-hidden="true"></div>
+    <div class="aurora aurora-one" aria-hidden="true"></div>
+    <div class="aurora aurora-two" aria-hidden="true"></div>
+    <div class="aurora aurora-three" aria-hidden="true"></div>
+
+    <main class="shell">
+      <header class="topbar glass">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 7L10 19L14 11L17 17L20 7" stroke="url(#whis-brand-grad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <defs>
+                <linearGradient id="whis-brand-grad" x1="4" y1="7" x2="20" y2="19" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#a855f7"/>
+                  <stop offset="0.5" stop-color="#6366f1"/>
+                  <stop offset="1" stop-color="#38bdf8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </span>
+          <div class="brand-text">
+            <p>WHIS</p>
+            <span>Video Structure Lab</span>
+          </div>
+        </div>
+
+        <div class="top-actions">
+          <a class="social-button github" href="https://github.com/whiskyyyyys/video-patcher" target="_blank" rel="noopener noreferrer" aria-label="Open GitHub Repository">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="currentColor" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+            <span>GitHub</span>
+          </a>
+          <a class="social-button tiktok" href="https://www.tiktok.com/@whis" target="_blank" rel="noopener noreferrer" aria-label="Open Whis on TikTok">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.7 3c.3 2.4 1.7 3.8 4.1 4v3.3a9 9 0 0 1-4.1-1v6.1a6.4 6.4 0 1 1-5.5-6.3v3.4a3.1 3.1 0 1 0 2.1 2.9V3h3.4z"/></svg>
+            <span>TikTok</span>
+          </a>
+          <a class="social-button discord" href="https://discord.gg/whis" target="_blank" rel="noopener noreferrer" aria-label="Join the Whis Discord">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.3A17 17 0 0 0 15.3 4l-.5 1.1a15 15 0 0 0-5.6 0L8.7 4a17 17 0 0 0-4.2 1.3C1.8 9.3 1.1 13.2 1.4 17a17 17 0 0 0 5.2 2.7l1.3-1.8-1.8-.9.4-.3c3.5 1.6 7.4 1.6 10.9 0l.5.3-1.8.9 1.3 1.8a17 17 0 0 0 5.2-2.7c.4-4.4-.8-8.2-3.1-11.7zM8.8 15.2c-1 0-1.9-1-1.9-2.2s.9-2.2 1.9-2.2 1.9 1 1.9 2.2-.9 2.2-1.9 2.2zm6.4 0c-1 0-1.9-1-1.9-2.2s.9-2.2 1.9-2.2 1.9 1 1.9 2.2-.9 2.2-1.9 2.2z"/></svg>
+          </a>
+          <button class="icon-button" id="soundToggle" type="button" aria-label="Mute interface sounds" aria-pressed="true" title="Toggle audio feedback">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4 4 0 0 0-2-3.46v6.92A4 4 0 0 0 16.5 12zm0-7.2v2.05a6 6 0 0 1 0 10.3v2.05a8 8 0 0 0 0-14.4z"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow-container">
+          <p class="eyebrow"><span class="pulse-dot"></span> Lossless MP4 Pipeline · In-Browser Engine</p>
+        </div>
+        <h1>Internal precision.<br><em>Zero re-encoding.</em></h1>
+        <p class="lede">Analyze and rebuild ISO-BMFF container structures with surgical byte precision. 100% local, zero uploads, zero quality degradation.</p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            100% Private (No Uploads)
+          </span>
+          <span class="hero-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+            Lossless Stream Copy
+          </span>
+          <span class="hero-tag">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Fast-Start moov Reordering
+          </span>
+        </div>
+      </section>
+
+      <section class="workspace glass" id="workspace">
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Choose or drop a video">
+          <input id="fileInput" type="file" accept="video/*,.mp4,.m4v,.mov" hidden>
+          <div class="drop-orbit">
+            <span class="orbit-ring-outer"></span>
+            <span class="orbit-ring-inner"></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"/></svg>
+          </div>
+          <div class="drop-copy">
+            <h2>Drop your video here</h2>
+            <p>or <button id="browseButton" type="button">browse files</button> from your device</p>
+            <div class="drop-badges">
+              <span class="badge">MP4</span>
+              <span class="badge">MOV</span>
+              <span class="badge">M4V</span>
+              <span class="badge highlight">Fast Start</span>
+              <span class="badge highlight">100% Local</span>
+              <span class="badge">Zero Cloud</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="processor" id="processor" hidden>
+          <div class="file-row">
+            <div class="file-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h11l5 5v11H4V4zm11 0v5h5M9 10l6 3-6 3v-6z"/></svg>
+            </div>
+            <div class="file-info">
+              <strong id="fileName">—</strong>
+              <span id="fileMeta">—</span>
+            </div>
+            <button class="text-button" id="replaceButton" type="button">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span>Replace file</span>
+            </button>
+          </div>
+
+          <!-- Video Preview Player -->
+          <div class="video-preview-card" id="previewContainer" hidden>
+            <div class="preview-header">
+              <div class="preview-tag">
+                <span class="live-indicator"></span>
+                <span>Video Stream Monitor</span>
+              </div>
+              <span class="preview-resolution" id="videoResolution">—</span>
+            </div>
+            <div class="video-wrap">
+              <video id="videoPreview" controls playsinline preload="metadata"></video>
+            </div>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-head">
+              <span id="statusLabel">Preparing…</span>
+              <strong id="progressValue">0%</strong>
+            </div>
+            <div class="progress-track">
+              <i id="progressBar"></i>
+              <b id="progressGlow"></b>
+            </div>
+            <p id="statusDetail">Reading file structure</p>
+          </div>
+
+          <!-- Container Pipeline Step Visualizer -->
+          <div class="pipeline-visualizer" id="pipelineVisualizer">
+            <div class="pipeline-step" id="stepFtyp">
+              <div class="step-badge">ATOM 01</div>
+              <strong>ftyp</strong>
+              <span>Sanitized branding</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step" id="stepMoov">
+              <div class="step-badge">ATOM 02</div>
+              <strong>moov</strong>
+              <span>Fast-start & Tech Audio</span>
+            </div>
+            <div class="pipeline-arrow" aria-hidden="true">→</div>
+            <div class="pipeline-step" id="stepMdat">
+              <div class="step-badge">ATOM 03</div>
+              <strong>mdat</strong>
+              <span>Raw payload preserved</span>
+            </div>
+          </div>
+
+          <div class="result-grid" id="resultGrid" hidden>
+            <article>
+              <div class="art-label">Mode</div>
+              <strong>Stream copy</strong>
+              <small>signatures scrubbed only</small>
+            </article>
+            <article>
+              <div class="art-label">Index</div>
+              <strong>Fast start</strong>
+              <small>moov before mdat</small>
+            </article>
+            <article>
+              <div class="art-label">Patch</div>
+              <strong id="patchCount">—</strong>
+              <small>technical samples</small>
+            </article>
+            <article>
+              <div class="art-label">Output</div>
+              <strong id="outputSize">—</strong>
+              <small id="sizeDelta">—</small>
+            </article>
+          </div>
+
+          <div class="error-card" id="errorCard" hidden>
+            <svg viewBox="0 0 24 24"><path d="M12 8v5m0 3.5v.01M10.3 3.8 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.8a2 2 0 0 0-3.4 0z"/></svg>
+            <div>
+              <strong>Processing stopped</strong>
+              <p id="errorMessage"></p>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="secondary-button" id="detailsButton" type="button" disabled>
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              <span>Technical details</span>
+            </button>
+            <button class="secondary-button" id="resetButton" type="button">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              <span>Patch another</span>
+            </button>
+            <button class="primary-button" id="exportButton" type="button" disabled>
+              <span>Export MP4</span>
+              <svg viewBox="0 0 24 24"><path d="M12 4v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="details glass" id="detailsPanel" hidden>
+        <div class="details-head">
+          <div>
+            <p class="eyebrow"><span class="pulse-dot"></span> Container Audit</p>
+            <h2>Technical Details</h2>
+          </div>
+          <button class="icon-button" id="closeDetails" type="button" aria-label="Close details">×</button>
+        </div>
+        <div class="audit-grid" id="auditGrid"></div>
+        <div class="log-container">
+          <div class="log-header-bar">
+            <div class="log-title">Live Execution Trace</div>
+            <button class="text-button" id="copyLogButton" type="button">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span>Copy Trace</span>
+            </button>
+          </div>
+          <div class="log" id="log"></div>
+        </div>
+      </section>
+
+      <footer class="glass-footer">
+        <span>Local-only processing</span>
+        <i></i>
+        <span>Zero cloud telemetry</span>
+        <i></i>
+        <span class="sig-pill">****whis</span>
+      </footer>
+    </main>
+
+    <!-- Floating Toast Notification -->
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

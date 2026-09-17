@@ -1,0 +1,7 @@
+.git
+.gitignore
+.dockerignore
+.DS_Store
+Thumbs.db
+verify.sh
+README.md

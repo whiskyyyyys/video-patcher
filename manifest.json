@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Whis Video Structure Patcher",
+  "version": "1.0.0",
+  "description": "Local, lossless ISO-BMFF structure patching with technical inspection and streaming export.",
+  "minimum_chrome_version": "120",
+  "permissions": ["downloads", "tabs"],
+  "action": {
+    "default_title": "Open Whis Video Patcher"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; worker-src 'self'"
+  }
+}
